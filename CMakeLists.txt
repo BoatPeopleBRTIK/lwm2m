@@ -1,0 +1,21 @@
+cmake_minimum_required (VERSION 3.0)
+project (wakaama)
+
+set(PREFIX ${CMAKE_INSTALL_PREFIX})
+set(LIBDIR "${PREFIX}/lib")
+set(INCLUDEDIR "${PREFIX}/include")
+
+option(DTLS "Enable DTLS" OFF)
+
+add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/core)
+add_definitions(-DLWM2M_LITTLE_ENDIAN -DLWM2M_CLIENT_MODE -DLWM2M_SERVER_MODE -DLWM2M_BOOTSTRAP)
+include_directories(${CMAKE_CURRENT_BINARY_DIR}/core)
+
+add_library(${PROJECT_NAME} SHARED ${CORE_SOURCES} platforms/Linux/platform.c)
+set_target_properties(${PROJECT_NAME} PROPERTIES
+	VERSION 1.0 SOVERSION 1 OUTPUT_NAME ${PROJECT_NAME}
+	COMPILE_DEFINITIONS $<$<CONFIG:Debug>:WITH_LOGS>)
+install(TARGETS ${PROJECT_NAME} LIBRARY DESTINATION ${LIBDIR})
+
+
+install(FILES ${CMAKE_SOURCE_DIR}/core/liblwm2m.h DESTINATION ${INCLUDEDIR})
