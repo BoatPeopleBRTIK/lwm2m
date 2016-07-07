@@ -7,6 +7,8 @@ Group: Development/Libraries
 URL: https://github.com/obgm/wakaama
 Source: %{name}-%{version}.tar.gz
 
+BuildRequires: cmake
+
 %description
 Implementation of the Open Mobile Alliance's LightWeight M2M protocol
 
