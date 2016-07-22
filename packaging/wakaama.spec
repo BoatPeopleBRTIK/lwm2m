@@ -1,6 +1,6 @@
 Name: wakaama
 Version: 1.0
-Release: 1
+Release: 1%{?dist}
 License: EDL&EPL
 Summary: Implementation of the Open Mobile Alliance's LightWeight M2M protocol (LWM2M)
 Group: Development/Libraries
