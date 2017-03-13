@@ -5,6 +5,9 @@
 DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
 DEB_HOST_GNU_TYPE  ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
 
+CFLAGS := $(shell dpkg-buildflags --get CFLAGS)
+CFLAGS := $(filter-out -O2,$(CFLAGS))
+
 %:
 	dh $@ --parallel --buildsystem=cmake
 
